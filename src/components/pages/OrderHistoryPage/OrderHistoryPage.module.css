@@ -1,16 +1,34 @@
 .OrderHistoryPage {
-    height: 100%;
-    display: grid;
-    grid-template-columns: 1.6fr 3.5fr 3fr;
-    grid-template-rows: 1fr;
-    background-color: var(--white);
-    border-radius: 2vmin;
-  }
-  
-  .OrderHistoryPage .aside {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin: 3vmin 2vmin;
-  }
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1.6fr 3.5fr 3fr;
+  grid-template-rows: 1fr;
+  background-color: var(--white);
+  border-radius: 2vmin;
+  border: solid 2px white;
+}
+
+.OrderHistoryPage .aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 3vmin 2vmin;
+}
+
+/* .button-New-Purchase {
+  margin-top: 1.5vmin;
+  padding: 0.8vmin 2vmin;
+  font-size: 1.5vmin;
+  background-color: var(--primary);
+  color: var(--white);
+  text-decoration: none;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.button-New-Purchase:hover {
+  background-color: var(--primary-dark);
+} */

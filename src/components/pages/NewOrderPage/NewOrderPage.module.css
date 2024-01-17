@@ -5,12 +5,29 @@
     grid-template-rows: 1fr;
     background-color: var(--white);
     border-radius: 2vmin;
+    border: 2px solid white;
   }
   
   .NewOrderPage aside {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    text-align: center;
     align-items: center;
     margin: 3vmin 2vmin;
+    border: 2px solid white;
   }
+
+
+  /* .NewOrderPage .button {
+    margin-top: 1.5vmin;
+    padding: 0.8vmin 2vmin;
+    font-size: 1.5vmin;
+    background-color: var(--primary);
+    color: var(--white);
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  } */

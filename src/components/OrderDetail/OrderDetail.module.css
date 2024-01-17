@@ -1,47 +1,76 @@
+
+
 .OrderDetail {
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 3vmin;
-    font-size: 2vmin;
-    color: var(--text-light);
-  }
-  
-  .OrderDetail .sectionHeading {
-    width: 100%
-  }
-  
-  .OrderDetail .lineItemContainer {
-    margin-top: 3vmin;
-    justify-content: flex-start;
-    height: calc(100vh - 18vmin);
-    width: 100%;
-  }
-  
-  .OrderDetail .total {
-    width: 100%;
-    display: grid;
-    grid-template-columns: 18.35vw 5.75vw 5.25vw;
-    padding: 1vmin 0;
-    color: var(--text-light);
-    border-top: .1vmin solid var(--tan-3);
-  }
-  
-  .OrderDetail .total span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5vw;
-    color: var(--text-dark);
-  }
-  
-  .OrderDetail .total span.right {
-    display: flex;
-    justify-content: flex-end;
-  }
-  
-  .OrderDetail .hungry {
-    position: absolute;
-    top: 50vh;
-    font-size: 2vmin;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 3vmin;
+  font-size: 3vmin;
+  color: var(--text-light);
+}
+
+.OrderDetail .sectionHeading {
+  width: 100%;
+}
+
+.OrderDetail .lineItemContainer {
+  margin-top: 3vmin;
+  justify-content: flex-start;
+  height: calc(100vh - 18vmin);
+  width: 100%;
+  overflow-y: auto; 
+}
+
+
+
+.OrderDetail .total {
+  width: 100%;
+  display: grid;
+  grid-template-columns: minmax(18.35vw, 1fr) minmax(5.75vw, 1fr) minmax(5.25vw, 1fr);
+  gap: 1vmin;
+  padding: 1vmin 0;
+  color: var(--text-light);
+  border-top: 0.1vmin solid var(--white);
+}
+
+
+
+
+.OrderDetail .total span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2vw;
+  color: var(--white);
+}
+
+
+
+
+.OrderDetail .total span.right {
+  display: flex;
+  justify-content: flex-end;
+  color: var(--white);
+}
+
+.OrderDetail .hungry {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2vmin;
+  color: var(--white); 
+}
+
+/* Add a hover effect to the checkout button */
+.OrderDetail .total button.btn-sm:hover {
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+
+/* Optionally, you can add transitions for smoother animations */
+.OrderDetail .total button.btn-sm {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+

@@ -10,6 +10,7 @@
   border-radius: 1vmin;
   font-size: 2.5vmin;
   box-shadow: 1vmin 0 0 var(--white); /* Add box-shadow to the right */
+  border: 1px solid white;
 }
 
 .MenuListItem .emoji {

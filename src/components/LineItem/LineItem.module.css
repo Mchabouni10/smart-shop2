@@ -10,11 +10,13 @@
     background-color: var(--white);
     border-top: 0.1vmin solid var(--tan-3);
     font-size: 1.5vw;
+    border: 2px solid white;
+    
   }
   
-  /* .LineItem:last-child {
+  .LineItem:last-child {
     border-bottom: 0.1vmin solid var(--tan-3);
-  } */
+  }
   
   .imageInCart {
     margin-right: 5em;
@@ -24,9 +26,7 @@
     border-radius: 4px; 
   }
 
-  .align-ctr{
-    font-size: .2em;
-  }
+
 
 
   .LineItem .itemName {
@@ -38,6 +38,7 @@
   .LineItem .flex-ctr-ctr {
     display: flex;
     align-items: center;
+    border: 2px solid white;
   }
   
   .LineItem .flex-col {

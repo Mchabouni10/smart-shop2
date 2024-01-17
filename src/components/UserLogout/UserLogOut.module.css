@@ -2,8 +2,9 @@
   font-size: 1.5vmin;
   color: var(--text-light);
   text-align: center;
+  margin-top: 2em;
   }
   
   .UserLogOut .email {
-    font-size: 2em;
+    font-size: 3.5vmin;
   }
