@@ -55,13 +55,13 @@ export default function NewOrderPage({ user, setUser }) {
     <main className={styles.NewOrderPage}>
       <aside>
         {/* <Brand /> */}
+        <UserLogOut user={user} setUser={setUser} />
         <CategoryList
           categories={categoriesRef.current}
           cart={setCart}
           setActiveCat={setActiveCat}
         />
         <Link to="/orders" className="button btn-sm">PREVIOUS PURCHASE</Link>
-        <UserLogOut user={user} setUser={setUser} />
       </aside>
       <MenuList
         menuItems={menuItems.filter(item => item.category.name === activeCat)}

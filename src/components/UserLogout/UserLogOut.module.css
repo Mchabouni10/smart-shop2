@@ -3,8 +3,13 @@
   color: var(--text-light);
   text-align: center;
   margin-top: 2em;
+  width: 80%;
+  margin-bottom: 3vmin;
+  border-radius: 2vmin;
+  background-color: var(--background-light);
   }
   
   .UserLogOut .email {
-    font-size: 3.5vmin;
+    font-size: 2.5vmin;
+    margin: 0%;
   }

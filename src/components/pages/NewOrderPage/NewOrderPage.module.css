@@ -5,17 +5,14 @@
     grid-template-rows: 1fr;
     background-color: var(--white);
     border-radius: 2vmin;
-    border: 2px solid white;
+    margin: 1vmin;
   }
   
   .NewOrderPage aside {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     text-align: center;
     align-items: center;
-    margin: 3vmin 2vmin;
-    border: 2px solid white;
   }
 
 
