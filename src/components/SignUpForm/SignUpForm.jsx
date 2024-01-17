@@ -67,7 +67,7 @@ const SignUpForm = ({ setUser }) => {
             onChange={handleChange}
             required
           />
-          <button type="submit" disabled={disable}>
+          <button className="Login-Out-Button" type="submit" disabled={disable}>
             SIGN UP
           </button>
         </form>

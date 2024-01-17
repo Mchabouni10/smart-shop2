@@ -23,6 +23,7 @@ code {
   --background-light: rgba(255, 255, 255, 0.13);
   --border-color: rgba(255, 255, 255, 0.1);
   --shadow-color: rgba(8, 7, 16, 0.6);
+  --text-color:var(--background-dark);
   --text-light: #ffffff;
   --text-dark: #e5e5e5;
   --placeholder-color: #e5e5e5;
@@ -50,7 +51,7 @@ body {
 }
 
 
-.section-heading {
+/* .section-heading {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -61,7 +62,7 @@ body {
   padding: .6vmin;
   text-align: center;
   font-size: 2vmin;
-}
+} */
 
 .form-container  {
   position: relative; 
@@ -80,14 +81,15 @@ body {
   padding: 60px 25px;
 }
 
+
 p.error-message {
-  position: absolute; /* Set position to absolute */
-  top: 70%; /* Adjust the top position as needed */
-  left: 50%; /* Adjust the left position as needed */
+  position: absolute; 
+  top: 70%; 
+  left: 50%; 
   transform: translate(-50%, -50%);
   color: white;
   text-align: center;
-  z-index: 2; /* Set a higher z-index to bring it in front of the form */
+  z-index: 2; 
 }
 
 
@@ -140,7 +142,7 @@ input:focus {
 
 
 
-button, a.button {
+.Login-Out-Button {
   margin-top: 30px;
   width: 100%;
   background-color: var(--text-light);
@@ -156,7 +158,7 @@ button.btn-sm {
   margin-top: 30px;
   font-size: 1.5vmin;
   padding: .6vmin .8vmin;
-}
+} 
 
 button.btn-xs {
   margin-top: 30px;
@@ -164,14 +166,15 @@ button.btn-xs {
   padding: .4vmin .5vmin;
 }
 
-button:disabled, form:invalid button[type="submit"] {
+.Login-Out-Button:disabled,
+form:invalid .Login-Out-Button[type="submit"] {
   margin-top: 30px;
   cursor: not-allowed;
   background-color: var(--text-dark);
 }
 
-button[type="submit"] {
-  /* margin-top: 100px; */
+
+.Login-Out-Button[type="submit"] {
   grid-column: span 2;
   margin: 1vmin 0 0;
 }

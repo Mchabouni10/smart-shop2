@@ -53,7 +53,7 @@ const LoginForm = ({ setUser }) => {
               required
             />
           </div>
-          <button type="submit">LOG IN</button>
+          <button className="Login-Out-Button" type="submit">LOG IN</button>
         </form>
       </div>
       <p className="error-message">&nbsp;{error}</p>
