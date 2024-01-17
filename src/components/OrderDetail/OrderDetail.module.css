@@ -1,17 +1,14 @@
 
 
 .OrderDetail {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 3vmin;
-  font-size: 3vmin;
+ 
   color: var(--text-light);
+  /* border: 1px solid red; */
 }
 
 .OrderDetail .sectionHeading {
   width: 100%;
+  font-size: 2vmin;
 }
 
 .OrderDetail .lineItemContainer {
@@ -23,11 +20,10 @@
 }
 
 
-
 .OrderDetail .total {
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(18.35vw, 1fr) minmax(5.75vw, 1fr) minmax(5.25vw, 1fr);
+  grid-template-columns: minmax(16vw, 1fr) minmax(5.75vw, 1fr) minmax(5.25vw, 1fr);
   gap: 1vmin;
   padding: 1vmin 0;
   color: var(--text-light);
@@ -36,41 +32,34 @@
 
 
 
-
 .OrderDetail .total span {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2vw;
+  font-size: 1.5vw;
   color: var(--white);
+  font-weight: bold;
+  
 }
 
 
 
 
-.OrderDetail .total span.right {
-  display: flex;
-  justify-content: flex-end;
-  color: var(--white);
+.yourcartside{
+  font-size: 1.3em;
+  text-align: center;
+  font-weight: bold;
 }
 
-.OrderDetail .hungry {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 2vmin;
-  color: var(--white); 
-}
 
-/* Add a hover effect to the checkout button */
-.OrderDetail .total button.btn-sm:hover {
+
+
+/* I have to fix this */
+.checkout-button {
   background-color: var(--primary-dark);
   color: var(--white);
+  padding: 2px;
 }
 
-/* Optionally, you can add transitions for smoother animations */
-.OrderDetail .total button.btn-sm {
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+
 

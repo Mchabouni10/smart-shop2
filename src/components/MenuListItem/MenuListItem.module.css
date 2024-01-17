@@ -1,6 +1,9 @@
+/* MenuListItem.module.css */
+
 .MenuListItem {
   width: 100%;
   display: flex;
+  gap: 2vmin; /* Add gap for spacing between items */
   justify-content: space-evenly;
   align-items: center;
   margin-bottom: 2vmin;
@@ -9,11 +12,11 @@
   background-color: var(--white);
   border-radius: 1vmin;
   font-size: 2.5vmin;
-  box-shadow: 1vmin 0 0 var(--white); /* Add box-shadow to the right */
+  box-shadow: 1vmin 0 0 var(--white);
   border: 1px solid white;
 }
 
-.MenuListItem .emoji {
+.MenuListItem .image {
   height: 20vmin;
   width: 20vmin;
   font-size: 4vw;
@@ -30,14 +33,15 @@
 .MenuListItem .buy {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: center; /* Align items to the center */
 }
 
 .MenuListItem .buy span {
   font-size: 2.7vmin;
   text-align: center;
   color: var(--text-light);
-  margin-bottom: 1vmin;
+  margin-bottom: 3vmin;
+  
 }
 
 .MenuListItem .name {
@@ -46,4 +50,11 @@
   font-weight: bold;
   color: var(--text-light);
 }
+
+.MenuListItem button {
+  margin-top: 1vmin;
+  border: 1px solid var(--background-light);
+}
+
+
 

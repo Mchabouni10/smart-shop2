@@ -1,73 +1,78 @@
 /* LineItem.module.css */
 
 .LineItem {
-    width: 100%;
-    display: grid;
-    grid-template-columns: minmax(3vw, 1fr) minmax(15.35vw, 1fr) minmax(5.75vw, 1fr) minmax(5.25vw, 1fr);
-    gap: 1vmin;
-    padding: 1vmin 0;
-    color: var(--text-light);
-    background-color: var(--white);
-    border-top: 0.1vmin solid var(--tan-3);
-    font-size: 1.5vw;
-    border: 2px solid white;
-    
-  }
+  display: grid;
+  grid-template-columns: 70px 1fr 100px 100px;
+  margin: 1vmin;
+  align-items: center;
+  padding: 10px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  color: #080710;
+}
+
+.LineItem:hover {
+  transform: scale(1.05);
+}
+
+.imageInCart {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 1vmin;
+  box-shadow: #080710;
+}
+
+.flex-ctr-ctr {
+  display: flex;
+  align-items: center;
   
-  .LineItem:last-child {
-    border-bottom: 0.1vmin solid var(--tan-3);
-  }
-  
-  .imageInCart {
-    margin-right: 5em;
-    width: 80px;
-    height: 60px;
-    object-fit: cover; 
-    border-radius: 4px; 
-  }
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+ 
+}
+
+.shopping-cart-name {
+  font-size: 7em;
+  text-align: center;
+  color: #080710;
+ 
+}
+
+.qty {
+  display: flex;
+  align-items: center;
+ 
+}
+
+.qty button {
+  background-color: #080710;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 10px;
+  padding: 1vmin;
+  margin: 0 5px;
+}
+
+.qty span {
+  font-size: 18px;
+  color: #080710;
+  margin: 0 10px;
+}
+
+.extPrice {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: right;
+}
 
 
 
-
-  .LineItem .itemName {
-    font-size: 0.2em; 
-    font-weight: bold; 
-    margin-bottom: 0.5vmin; 
-  }
-  
-  .LineItem .flex-ctr-ctr {
-    display: flex;
-    align-items: center;
-    border: 2px solid white;
-  }
-  
-  .LineItem .flex-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  
-  .LineItem .qty,
-  .LineItem .extPrice {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.3vw;
-  }
-  
-  .LineItem button {
-    margin: 0;
-    cursor: pointer;
-    background-color: var(--white);
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    padding: 0.5vmin 1vmin;
-    font-size: 1.2vw;
-    transition: background-color 0.3s ease;
-  }
-  
-  .LineItem button:hover {
-    background-color: var(--primary-dark);
-  }
   

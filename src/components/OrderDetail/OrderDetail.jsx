@@ -33,7 +33,7 @@ export default function OrderDetail({ order, handleChangeQty, handleCheckout }) 
                   <span className={styles.right}>TOTAL&nbsp;&nbsp;</span>
                   :
                   <button
-                    className="btn-sm"
+                    className="checkout-button"
                     onClick={handleCheckout}
                     disabled={!lineItems.length}
                   >CHECKOUT</button>
@@ -43,7 +43,7 @@ export default function OrderDetail({ order, handleChangeQty, handleCheckout }) 
               </section>
             </>
             :
-            <div className={styles.hungry}>make your choice</div>
+            <div className={styles.yourcartside}>your shopping cart here</div>
           }
         </div>
       </div>
