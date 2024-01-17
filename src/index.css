@@ -15,10 +15,10 @@ code {
 
 /* CSS Custom Properties */
 :root {
-  --primary: #1845ad;
+  /* --primary: #1845ad;
   --secondary: #23a2f6;
   --tertiary: #ff512f;
-  --quaternary: #f09819;
+  --quaternary: #f09819; */
   --background-dark: #080710;
   --background-light: rgba(255, 255, 255, 0.13);
   --border-color: rgba(255, 255, 255, 0.1);
@@ -64,9 +64,9 @@ body {
 }
 
 .form-container  {
-  position: relative; /* Set position to relative */
-  z-index: 1; /* Set a higher z-index to bring it in front of other elements */
-  height: 520px;
+  position: relative; 
+  z-index: 1; 
+  height: auto;
   width: 400px;
   background-color: var(--background-light);
   transform: translate(-50%, -50%);

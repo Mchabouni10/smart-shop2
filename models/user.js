@@ -1,6 +1,3 @@
-//user.js in models
-
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 // Add the bcrypt library

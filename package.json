@@ -1,5 +1,5 @@
 {
-  "name": "fullstackproject",
+  "name": "caffe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -21,9 +21,11 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-server": "nodemon server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "seed": "node seed.js"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +47,6 @@
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "eslint-plugin-css-modules": "^2.12.0"
+    "nodemon": "^3.0.2"
   }
 }

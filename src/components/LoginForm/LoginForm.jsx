@@ -39,7 +39,7 @@ const LoginForm = ({ setUser }) => {
             name="email"
             value={credentials.email}
             onChange={handleChange}
-            placeholder="example@mail.com" // Placeholder text
+            placeholder="" 
             required
           />
           <label>Password</label>
@@ -49,13 +49,9 @@ const LoginForm = ({ setUser }) => {
               name="password"
               value={credentials.password}
               onChange={handleChange}
-              placeholder="********" // Placeholder text with stars
+              placeholder="" 
               required
             />
-            <div style={{ position: 'absolute', top: '50%', right: '10px', transform: 'translateY(-50%)', color: 'gray' }}>
-              {/* Add any icon or text you want to use for password visibility */}
-              &#9679;&#9679;&#9679;&#9679;
-            </div>
           </div>
           <button type="submit">LOG IN</button>
         </form>

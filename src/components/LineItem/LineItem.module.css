@@ -1,0 +1,72 @@
+/* LineItem.module.css */
+
+.LineItem {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(3vw, 1fr) minmax(15.35vw, 1fr) minmax(5.75vw, 1fr) minmax(5.25vw, 1fr);
+    gap: 1vmin;
+    padding: 1vmin 0;
+    color: var(--text-light);
+    background-color: var(--white);
+    border-top: 0.1vmin solid var(--tan-3);
+    font-size: 1.5vw;
+  }
+  
+  /* .LineItem:last-child {
+    border-bottom: 0.1vmin solid var(--tan-3);
+  } */
+  
+  .imageInCart {
+    margin-right: 5em;
+    width: 80px;
+    height: 60px;
+    object-fit: cover; 
+    border-radius: 4px; 
+  }
+
+  .align-ctr{
+    font-size: .2em;
+  }
+
+
+  .LineItem .itemName {
+    font-size: 0.2em; 
+    font-weight: bold; 
+    margin-bottom: 0.5vmin; 
+  }
+  
+  .LineItem .flex-ctr-ctr {
+    display: flex;
+    align-items: center;
+  }
+  
+  .LineItem .flex-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .LineItem .qty,
+  .LineItem .extPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.3vw;
+  }
+  
+  .LineItem button {
+    margin: 0;
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    padding: 0.5vmin 1vmin;
+    font-size: 1.2vw;
+    transition: background-color 0.3s ease;
+  }
+  
+  .LineItem button:hover {
+    background-color: var(--primary-dark);
+  }
+  

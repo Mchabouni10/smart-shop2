@@ -20,8 +20,17 @@ app.use(express.static(path.join(__dirname, "build")));
 // Put API routes here, before the "catch all" route
 
 // Middleware to verify token and assign user object of payload to req.user.
-// Be sure to mount before routes
-app.use(require("./config/checkToken"));
+
+
+// Check if token and create req.user
+app.use(require('./config/checkToken'));
+
+// Put API routes here, before the "catch all" route
+app.use('/api/users', require('./routes/api/users'));
+// Protect the API routes below from anonymous users
+const ensureLoggedIn = require('./config/ensureLoggedIn');
+app.use('/api/items', ensureLoggedIn, require('./routes/api/items'));
+app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'));
 
 //other mid and routs
 
