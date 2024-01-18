@@ -2,10 +2,15 @@
 
 import styles from './OrderListItem.module.css';
 
-export default function OrderListItem({ order, isSelected, handleSelectOrder, handleDeleteOrder }) {
+export default function OrderListItem({ order, isSelected, handleSelectOrder, handleEditOrder, handleDeleteOrder }) {
   const handleDeleteClick = (event) => {
-    event.stopPropagation(); // Prevents the selection when clicking delete
+    event.stopPropagation(); 
     handleDeleteOrder(order._id);
+  };
+
+  const handleEditClick = (event) => {
+    event.stopPropagation(); 
+    handleEditOrder(order._id);
   };
 
   return (
@@ -17,6 +22,9 @@ export default function OrderListItem({ order, isSelected, handleSelectOrder, ha
       <div className="align-rt">
         <div>${order.orderTotal.toFixed(2)}</div>
         <div className="smaller">{order.totalQty} Item{order.totalQty > 1 ? 's' : ''}</div>
+        <button className={styles.editButton} onClick={handleEditClick}>
+          Edit
+        </button>
         <button className={styles.deleteButton} onClick={handleDeleteClick}>
           Delete
         </button>
@@ -24,4 +32,5 @@ export default function OrderListItem({ order, isSelected, handleSelectOrder, ha
     </div>
   );
 }
+
 

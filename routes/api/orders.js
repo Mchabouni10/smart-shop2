@@ -2,6 +2,13 @@ const express = require('express');
 const router = express.Router();
 const ordersCtrl = require('../../controllers/api/orders');
 
+
+//delete /api/orders/:id
+router.delete('/:id', ordersCtrl.deleteOrder);
+
+// PUT /api/orders/:id
+router.put('/:id', ordersCtrl.editOrder);
+
 // GET /api/orders/cart
 router.get('/cart', ordersCtrl.cart);
 // GET /api/orders/history
