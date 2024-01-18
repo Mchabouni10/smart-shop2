@@ -33,7 +33,7 @@ export default function OrderDetail({ order, handleChangeQty, handleCheckout }) 
                   <span className={styles.right}>TOTAL&nbsp;&nbsp;</span>
                   :
                   <button
-                    className="button.btn-sm"
+                    className="btn-med"
                     onClick={handleCheckout}
                     disabled={!lineItems.length}
                   >CHECKOUT</button>

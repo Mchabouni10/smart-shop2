@@ -3,12 +3,14 @@
 .OrderDetail {
  
   color: var(--text-light);
-  /* border: 1px solid red; */
+  text-align: center;
+  
 }
 
 .OrderDetail .sectionHeading {
   width: 100%;
-  font-size: 2vmin;
+  font-size: 2.2vmin;
+
 }
 
 .OrderDetail .lineItemContainer {
@@ -21,13 +23,15 @@
 
 
 .OrderDetail .total {
-  width: 100%;
+  width: 97%;
   display: grid;
-  grid-template-columns: minmax(16vw, 1fr) minmax(5.75vw, 1fr) minmax(5.25vw, 1fr);
+  grid-template-columns: minmax(8vw, 1fr) minmax(6.75vw, 1fr) minmax(4.25vw, 1fr);
   gap: 1vmin;
   padding: 1vmin 0;
   color: var(--text-light);
   border-top: 0.1vmin solid var(--white);
+  margin-left: 3vmin;
+  
 }
 
 
@@ -39,7 +43,7 @@
   font-size: 1.5vw;
   color: var(--white);
   font-weight: bold;
-  
+  margin-top: 5vmin;
 }
 
 
@@ -50,6 +54,9 @@
   text-align: center;
   font-weight: bold;
 }
+
+
+
 
 
 
