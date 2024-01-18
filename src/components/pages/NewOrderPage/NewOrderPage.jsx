@@ -3,11 +3,10 @@ import * as itemsAPI from '../../../utilities/items-api';
 import * as ordersAPI from '../../../utilities/order-api';
 import styles from './NewOrderPage.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-// import Brand from '../../Brand/Brand';
 import MenuList from '../../MenuList/MenuList';
 import CategoryList from '../../CategoryList/CategoryList';
 import OrderDetail from '../../OrderDetail/OrderDetail';
-import UserLogOut from '../../UserLogOut/UserLogOut'
+import UserLogOut from '../../UserLogOut/UserLogOut';
 
 export default function NewOrderPage({ user, setUser }) {
   const [menuItems, setMenuItems] = useState([]);
@@ -16,55 +15,78 @@ export default function NewOrderPage({ user, setUser }) {
   const categoriesRef = useRef([]);
   const navigate = useNavigate();
 
-  useEffect(function() {
+  useEffect(function () {
     async function getItems() {
-      const items = await itemsAPI.getAll();
-      categoriesRef.current = items.reduce((cats, item) => {
-        const cat = item.category.name;
-        return cats.includes(cat) ? cats : [...cats, cat];
-      }, []);
-      setMenuItems(items);
-      setActiveCat(categoriesRef.current[0]);
+      try {
+        const items = await itemsAPI.getAll();
+        categoriesRef.current = items.reduce((cats, item) => {
+          const cat = item.category.name;
+          return cats.includes(cat) ? cats : [...cats, cat];
+        }, []);
+        setMenuItems(items);
+        setActiveCat(categoriesRef.current[0]);
+      } catch (error) {
+        console.error('Error fetching menu items:', error);
+      }
     }
-    getItems();
+  
     async function getCart() {
-      const cart = await ordersAPI.getCart();
-      setCart(cart);
+      try {
+        const cart = await ordersAPI.getCart();
+        setCart(cart);
+      } catch (error) {
+        console.error('Error fetching cart:', error);
+      }
     }
+  
+    getItems();
     getCart();
   }, []);
 
-
-  /*-- Event Handlers --*/
   async function handleAddToOrder(itemId) {
-    const updatedCart = await ordersAPI.addItemToCart(itemId);
-    setCart(updatedCart);
+    try {
+      const updatedCart = await ordersAPI.addItemToCart(itemId);
+      console.log('Updated Cart after add:', updatedCart);
+      setCart(updatedCart);
+    } catch (error) {
+      console.error('Error adding item to cart:', error);
+    }
   }
 
   async function handleChangeQty(itemId, newQty) {
-    const updatedCart = await ordersAPI.setItemQtyInCart(itemId, newQty);
-    setCart(updatedCart);
+    try {
+      const updatedCart = await ordersAPI.setItemQtyInCart(itemId, newQty);
+      console.log('Updated Cart after qty change:', updatedCart);
+      setCart(updatedCart);
+    } catch (error) {
+      console.error('Error changing item quantity in cart:', error);
+    }
   }
 
   async function handleCheckout() {
-    await ordersAPI.checkout();
-    navigate('/orders');
+    try {
+      await ordersAPI.checkout();
+      navigate('/orders');
+    } catch (error) {
+      console.error('Error checking out:', error);
+    }
   }
 
   return (
     <main className={styles.NewOrderPage}>
       <aside>
-        {/* <Brand /> */}
         <UserLogOut user={user} setUser={setUser} />
         <CategoryList
           categories={categoriesRef.current}
           cart={setCart}
           setActiveCat={setActiveCat}
         />
-        <Link to="/orders" className="Login-Out-Button">PREVIOUS PURCHASE</Link>
+        <Link to="/orders" className="Login-Out-Button">
+          PREVIOUS PURCHASE
+        </Link>
       </aside>
       <MenuList
-        menuItems={menuItems.filter(item => item.category.name === activeCat)}
+        menuItems={menuItems.filter((item) => item.category.name === activeCat)}
         handleAddToOrder={handleAddToOrder}
       />
       <OrderDetail

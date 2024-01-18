@@ -31,11 +31,17 @@ export default function OrderHistoryPage({ user, setUser }) {
     try {
       console.log(`Edit order with ID ${orderId}`);
       const order = orders.find((order) => order._id === orderId);
+      
+      if (!order) {
+        console.error(`Order with ID ${orderId} not found.`);
+        return;
+      }
+  
       console.log('Selected order:', order);
   
-      // Pass the items to the NewOrderPage using query parameters
-      const itemsParam = encodeURIComponent(JSON.stringify(order.items));
-      navigate(`/orders/new?items=${itemsParam}`);
+      //=======================================
+      const lineItemsParam = encodeURIComponent(JSON.stringify(order.lineItems));
+      navigate(`/orders/new?lineItems=${lineItemsParam}`);
     } catch (error) {
       console.error('An error occurred while editing the order:', error);
     }
