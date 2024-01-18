@@ -182,7 +182,7 @@ Button, .Login-Out-Button {
   margin-top: 30px;
   text-decoration: none;
   text-align: center;
-  /* width: 90%; */
+  width: 100%;
   background-color: var(--text-light);
   color: var(--background-dark);
   padding: 10px 0;
@@ -202,11 +202,11 @@ button.btn-sm {
 } 
 
 button.btn-xs {
-  margin-top: 30px;
+  margin-top: 5px;
   font-size: 1vmin;
   padding: .4vmin .5vmin;
   background-color: var(--text-light);
-  width: 60%;
+  width: 30%;
 }
 
 button.btn-med {

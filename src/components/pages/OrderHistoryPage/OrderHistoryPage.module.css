@@ -5,7 +5,6 @@
   grid-template-rows: 1fr;
   background-color: var(--white);
   border-radius: 2vmin;
-  border: solid 2px white;
 }
 
 .OrderHistoryPage .aside {

@@ -1,29 +1,50 @@
 .OrderListItem {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 3vmin;
-    padding: 2vmin;
-    color: var(--text-light);
-    background-color: var(--white);
-    border: .2vmin solid var(--tan-3);
-    border-radius: 1vmin;
-    font-size: 2vmin;
-    cursor: pointer;
-    }
-    
-    .OrderListItem > div> div:first-child {
-    margin-bottom: .5vmin;
-    }
-    
-    .OrderListItem.selected {
-    border-color: var(--blue);
-    border-width: .2vmin;
-    cursor: default;
-    }
-    
-    .OrderListItem:not(.selected):hover {
-    border-color: var(--blue);
-    border-width: .2vmin;
-    }
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3vmin;
+  padding: 2vmin;
+  
+  color: var(--text-light);
+  background-color: var(--white);
+  border: 0.2vmin solid var(--white);
+  border-radius: 1vmin;
+  font-size: 2vmin;
+  cursor: pointer;
+  border: 1px solid white;
+}
+
+.OrderListItem > div > div:first-child {
+  margin-bottom: 0.5vmin;
+  font-size: 2vmin;
+  font-weight: bold;
+}
+
+.OrderListItem.selected {
+  border-width: 0.2vmin;
+  cursor: default;
+}
+
+.OrderListItem:not(.selected):hover {
+  border-color: var(--blue);
+  border-width: 0.2vmin;
+}
+
+.editButton {
+  font-size: 2vmin;
+  margin: .2vmin;
+  font-weight: bold;
+  padding: 0.6vmin 0.8vmin;
+  background-color: var(--text-light);
+  width: 100%;
+}
+
+.deleteButton {
+  font-size: 2vmin;
+  margin: .2vmin;
+  font-weight: bold;
+  padding: 0.6vmin 0.8vmin;
+  background-color: var(--text-light);
+  width: 100%;
+}

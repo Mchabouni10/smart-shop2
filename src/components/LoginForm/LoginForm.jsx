@@ -1,7 +1,10 @@
 // LoginForm.jsx
 
 import React, { useState } from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { login } from '../../utilities/users-service';
+
 
 const LoginForm = ({ setUser }) => {
   const [credentials, setCredentials] = useState({
@@ -33,7 +36,10 @@ const LoginForm = ({ setUser }) => {
     <div>
       <div className="form-container">
         <form autoComplete="off" onSubmit={handleSubmit}>
-          <label>Email</label>
+          <div style={{ textAlign: 'center' }}>
+            <FontAwesomeIcon icon={faUser} size="4x" style={{ marginBottom: '10px', color: 'var(--text-dark)' }} />
+          </div>
+          <label>Email<FontAwesomeIcon icon={faEnvelope} size="1x" style={{marginLeft:'6px', color: 'var(--text-dark)' }} /></label>
           <input
             type="text"
             name="email"
@@ -42,7 +48,7 @@ const LoginForm = ({ setUser }) => {
             placeholder="" 
             required
           />
-          <label>Password</label>
+          <label>Password<FontAwesomeIcon icon={faLock} size="1x" style={{marginLeft:'6px', color: 'var(--text-dark)' }} /></label>
           <div style={{ position: 'relative' }}>
             <input
               type="password"

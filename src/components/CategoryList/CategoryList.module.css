@@ -3,19 +3,23 @@
     list-style: none;
     padding: 0;
     font-size: 1.7vw;
+    margin-top: 6vmin;
+    margin-bottom: 6vmin;
+    width: 100%;
     }
     
     .CategoryList li {
     padding: .6vmin;
     text-align: center;
     border-radius: .5vmin;
-    margin-bottom: .5vmin;
+    margin-bottom: 1vmin;
+    font-size: 3vmin;
     }
     
     .CategoryList li:hover:not(.active) {
     cursor: pointer;
-    background-color: rgba(255, 255, 255, 0.13);
-    color: var(--white);
+    background-color:var(--text-light) ;
+    color: #080710;
     }
     
     .CategoryList li.active {

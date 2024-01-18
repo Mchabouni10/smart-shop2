@@ -1,5 +1,7 @@
 import styles from './OrderDetail.module.css';
 import LineItem from '../LineItem/LineItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 // Used to display the details of any order, including the cart (unpaid order)
 export default function OrderDetail({ order, handleChangeQty, handleCheckout }) {
@@ -43,7 +45,10 @@ export default function OrderDetail({ order, handleChangeQty, handleCheckout }) 
               </section>
             </>
             :
-            <div className={styles.yourcartside}>your shopping cart here</div>
+            <>
+            <div className={styles.yourcartside}>Empty</div>
+            <div><FontAwesomeIcon icon={faCartShopping} size="4x" style={{marginTop:'5vmin',  color: 'var(--text-dark)' }} /></div>
+            </>
           }
         </div>
       </div>
