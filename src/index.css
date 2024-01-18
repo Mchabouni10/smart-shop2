@@ -13,12 +13,8 @@ code {
 }
 
 
-/* CSS Custom Properties */
+
 :root {
-  /* --primary: #1845ad;
-  --secondary: #23a2f6;
-  --tertiary: #ff512f;
-  --quaternary: #f09819; */
   --background-dark: #080710;
   --background-light: rgba(255, 255, 255, 0.13);
   --border-color: rgba(255, 255, 255, 0.1);
@@ -51,7 +47,45 @@ body {
 }
 
 
-/* .section-heading {
+#root {
+  height: 100%;
+}
+
+
+
+.align-ctr {
+  text-align: center;
+  font-weight: bold;
+  font-size: 2vmin;
+}
+
+.align-rt {
+  text-align: right;
+}
+
+.smaller {
+  font-size: smaller;
+}
+
+.flex-ctr-ctr {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-j-end {
+  justify-content: flex-end;
+}
+
+.scroll-y {
+  overflow-y: scroll;
+}
+
+.section-heading {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -62,7 +96,10 @@ body {
   padding: .6vmin;
   text-align: center;
   font-size: 2vmin;
-} */
+}
+
+
+
 
 .form-container  {
   position: relative; 
@@ -141,9 +178,10 @@ input:focus {
 }
 
 
-
-.Login-Out-Button {
+Button, .Login-Out-Button {
   margin-top: 30px;
+  text-decoration: none;
+  text-align: center;
   width: 100%;
   background-color: var(--text-light);
   color: var(--background-dark);
@@ -156,14 +194,24 @@ input:focus {
 
 button.btn-sm {
   margin-top: 30px;
-  font-size: 1.5vmin;
+  font-size: 2vmin;
+  font-weight: bold;
   padding: .6vmin .8vmin;
+  background-color: var(--text-light);
 } 
 
 button.btn-xs {
   margin-top: 30px;
   font-size: 1vmin;
   padding: .4vmin .5vmin;
+  background-color: var(--text-light);
+}
+
+button.btn-med {
+  margin-top: 30px;
+  font-size: 2vmin;
+  padding: .4vmin .10vmin;
+  background-color: var(--text-light);
 }
 
 .Login-Out-Button:disabled,

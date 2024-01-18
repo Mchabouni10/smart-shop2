@@ -11,7 +11,7 @@ return (
   <div className={styles.UserLogOut}>
     <div className={styles.email}>Welcome: {user.name}</div>
     <div className={styles.email}>{user.email}</div>
-    <button className="button-logout-logout" onClick={handleLogOut}>LOG OUT</button>
+    <button className="logout-button" onClick={handleLogOut}>LOG OUT</button>
   </div>
 );
 }

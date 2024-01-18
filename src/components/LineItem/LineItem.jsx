@@ -9,7 +9,7 @@ return (
           className={styles.imageInCart}    
         /></div>
     <div className="shopping-cart">
-      <span className="shopping-cart-name">{lineItem.item.name}</span>
+      <span className="align-ctr">{lineItem.item.name}</span>
       {/* <span>{lineItem.item.price.toFixed(2)}</span> */}
     </div>
     <div className={styles.qty} style={{ justifyContent: isPaid && 'center' }}>
@@ -17,7 +17,7 @@ return (
         <button
           className="btn-xs"
           onClick={() => handleChangeQty(lineItem.item._id, lineItem.qty - 1)}
-        >−</button>
+        >-</button>
       }
       <span>{lineItem.qty}</span>
       {!isPaid &&

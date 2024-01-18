@@ -10,7 +10,7 @@ export default function OrderList({ orders, activeOrder, handleSelectOrder, hand
       isSelected={o === activeOrder}
       handleSelectOrder={handleSelectOrder}
       handleDeleteOrder={handleDeleteOrder}
-      handleEditOrder={handleEditOrder}  // Pass handleEditOrder as a prop
+      handleEditOrder={handleEditOrder}  // I need help with this 
       key={o._id}
     />
   ));

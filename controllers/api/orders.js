@@ -1,17 +1,25 @@
 const Order = require('../../models/order');
 
+
+
+
+
+
+
 // Edit an existing order
 async function editOrder(req, res) {
   try {
-    // Fetch the existing order from the database using req.params.id
-    // Implement the logic to edit the order details based on your requirements
-    const editedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: true });
+ 
+    const editedOrder = await Order.findByIdAndUpdate(req.params.id, req.body, { new: false });//
 
     res.status(200).json(editedOrder);
   } catch (error) {
     res.status(400).json({ msg: error.message });
   }
 }
+
+
+
 
 
 async function deleteOrder(req, res) {

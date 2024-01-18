@@ -11,18 +11,15 @@
   
   .UserLogOut .email {
     font-size: 2.5vmin;
-    margin: 0%;
+    margin: .6vmin;
   }
 
-  .button-logout-logout {
+  button.btn-sm {
     margin-top: 30px;
-    width: 100%;
+    font-size: 1.5vmin;
+    font-weight: bold;
+    padding: .6vmin .8vmin;
     background-color: var(--text-light);
-    color: var(--background-light);
-    padding: 10px 0;
-    font-size: 12px;
-    font-weight: 400;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 1px solid red;
-  }
+  } 
+
+ 

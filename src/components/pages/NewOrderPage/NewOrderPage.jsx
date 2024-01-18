@@ -61,7 +61,7 @@ export default function NewOrderPage({ user, setUser }) {
           cart={setCart}
           setActiveCat={setActiveCat}
         />
-        <Link to="/orders" className="previous-purchase-button">PREVIOUS PURCHASE</Link>
+        <Link to="/orders" className="Login-Out-Button">PREVIOUS PURCHASE</Link>
       </aside>
       <MenuList
         menuItems={menuItems.filter(item => item.category.name === activeCat)}
