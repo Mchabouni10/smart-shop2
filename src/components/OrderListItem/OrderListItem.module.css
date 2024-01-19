@@ -24,11 +24,13 @@
 .OrderListItem.selected {
   border-width: 0.2vmin;
   cursor: default;
+  
 }
 
 .OrderListItem:not(.selected):hover {
   border-color: var(--blue);
   border-width: 0.2vmin;
+  
 }
 
 .editButton {

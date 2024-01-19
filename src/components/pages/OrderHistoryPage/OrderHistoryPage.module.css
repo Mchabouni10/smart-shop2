@@ -5,6 +5,8 @@
   grid-template-rows: 1fr;
   background-color: var(--white);
   border-radius: 2vmin;
+  border: 1px solid red;
+  margin: 1vmin;
 }
 
 .OrderHistoryPage .aside {
@@ -12,7 +14,8 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 3vmin 2vmin;
+  margin: 2vmin;
+  border: 1px solid red;
 }
 
 /* .button-New-Purchase {
