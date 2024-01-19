@@ -77,6 +77,7 @@ export default function NewPurchase({ user, setUser }) {
     <main className={styles.NewOrderPage}>
       <aside>
         <UserLogOut user={user} setUser={setUser} />
+        
         {/* <Brand className={styles.BrandInNewOrder} /> */}
         <CategoryList
           categories={categoriesRef.current}
@@ -96,6 +97,7 @@ export default function NewPurchase({ user, setUser }) {
         handleChangeQty={handleChangeQty}
         handleCheckout={handleCheckout}
       />
+      {/* <Link to="/products">Go to Products</Link> */}
     </main>
   );
 }

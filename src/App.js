@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import styles from './App.module.css';
 import { getUser } from './utilities/users-service';
 import AuthPage from './components/pages/AuthPage/AuthPage';
@@ -18,7 +18,9 @@ export default function App() {
             <Route path="/orders" element={<PurchaseHistoryPage user={user} setUser={setUser} />} />
             {/* redirect to /orders/new if path in address bar hasn't matched a <Route> above */}
             <Route path="/*" element={<Navigate to="/orders/new" />} />
+            {/* <Route path="/products/*" element={<Navigate to="/index.ejs" />} /> */}
           </Routes>
+          {/* <Link to="/products">Products</Link> */}
         </>
         :
         <AuthPage setUser={setUser} />
