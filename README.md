@@ -1,70 +1,97 @@
-# Getting Started with Create React App
+<!-- # Aviation Info Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Welcome to the Aviation Info project! This comprehensive platform offers extensive knowledge about the aviation industry, covering various aspects such as airline companies, airports, and detailed information about different aircraft models and manufacturers. The project integrates three APIs, providing in-depth details about the industry.
 
-## Available Scripts
+## Table of Contents
 
-In the project directory, you can run:
 
-### `npm start`
+- [Note](#Note)
+- [Introduction](#introduction)
+- [Features](#features)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Technologies Used](#technologies-used)
+- [Documentation](#documentation)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Note
+Note: This project is part of a comprehensive training cohort website. All images and concepts utilized are unrelated to any specific organization or advertising service. The selection of images was driven by the sole purpose of enhancing the user interface (UI) of the project, with no intention of promoting or endorsing any particular company 
+or commercial entity.
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+## Introduction
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+This project is designed to showcase information about various aviation such Airports, Airlines Company, and Aircrafts manufcturer with different models, and  professionals, including pilots, engineers, technicians, and more. The website is builded with different technologies using routes and hooks as most. Also the way to implement an API in the website and the importance of it. 
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Layout
+### Screenshots
+Include screenshots of different sections or pages of your project.
+![HomePage top](./Images/home-pagetop.png)
+![HomePage middle 1](./Images/home-pagemiddle1.png)
+![HomePage middle 2](./Images/home-pagemiddle2.png)
+![HomePage middle 3](./Images/home-pagemiddle3.png)
+![HomePage footer](./Images/footerScreenShot.png)
+![Login Page](./Images/LoginScreen.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Airlines Information**: Access comprehensive data about different airline companies, including their operational history, fleet details, and key statistics. Stay informed about the dynamic world of aviation companies.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Airports Insights**: Gain insights into various airports worldwide. Explore details such as location, facilities, and key statistics, empowering users with knowledge about the global network of airports.
 
-## Learn More
+- **Aircraft Models and Manufacturers**: get into the intricate details of aircraft models and their manufacturers. Learn about the specifications, features, and the companies behind the creation of these flying marvels.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **User Authentication**: Ensure a personalized experience with secure user authentication, allowing users to customize their interactions with the platform.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+- **Aviation Professionals**: Explore detailed profiles of various aviation professionals, including pilots, co-pilots, chief engineers, avionics technicians, and maintenance technicians. Each profile includes information about their roles, responsibilities, and contact details.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Project Structure
 
-### Analyzing the Bundle Size
+The project is structured into distinct sections, making it easy to navigate and contribute:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **src/pages/employees**: Components for displaying and filtering the list of aviation professionals.
+- **src/pages/Airlines**: Components related to airlines data.
+- **src/pages/Airports**: Components for presenting airport information.
+- **src/pages/Aiplanes**: Components handling aircraft models and manufacturers details.
+- **src/components**: Reusable React components for consistent UI elements.
+- **src/context**: Context setup for managing state across components.
 
-### Making a Progressive Web App
+## Technologies Used
+- React
+- [React Router](https://reactrouter.com/) for navigation
+- React Hooks (useState, useReducer, useContext, etc.)
+- CSS
+- HTML
+- VSCODE
+- Local Storage
+- Express.js
+- Mongodb
+- api routers
+- api models 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Documentation
+- [Official React Documentation](https://reactjs.org/docs/getting-started.html)
+- [React Router Documentation](https://reactrouter.com/web/guides/quick-start)
 
-### Advanced Configuration
+### YouTube Videos
+- [React Router Tutorial](https://www.youtube.com/watch?v=Ul3y1LXxzdU)
+- [React Hooks Tutorial](https://www.youtube.com/watch?v=LlvBzyy-558)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### W3Schools Courses
+- [W3Schools React Tutorial](https://www.w3schools.com/)
+- [W3Schools React Router Tutorial](https://www.w3schools.com/react/default.asp)
 
-### Deployment
+### Jordan Class Exemple
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Homework
+- Complete the Homework Assignment.
 
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Installation
+-npx create-react-app
+-npx nodemon server
+-npm start  -->

@@ -1,7 +1,7 @@
 // OrderList.js
 
-import OrderListItem from '../OrderListItem/OrderListItem';
-import styles from './OrderList.module.css';
+import OrderListItem from '../PurchaseListItem/PurchaseListItem';
+import styles from './PurchaseList.module.css';
 
 export default function OrderList({ orders, activeOrder, handleSelectOrder, handleDeleteOrder, handleEditOrder }) {
   const orderItems = orders.map((o) => (

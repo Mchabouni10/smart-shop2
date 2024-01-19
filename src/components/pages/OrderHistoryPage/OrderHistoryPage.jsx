@@ -6,8 +6,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import * as ordersAPI from '../../../utilities/order-api';
 import Brand from '../../Brand/Brand';
 import UserLogOut from '../../UserLogOut/UserLogOut';
-import OrderList from '../../OrderList/OrderList';
-import OrderDetail from '../../OrderDetail/OrderDetail';
+import OrderList from '../../PurchaseList/PurchaseList';
+import OrderDetail from '../../PurchaseDetail/PurchaseDetail';
 import { getToken } from '../../../utilities/users-service';
 
 export default function OrderHistoryPage({ user, setUser }) {

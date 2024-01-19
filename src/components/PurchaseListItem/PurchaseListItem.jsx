@@ -1,6 +1,6 @@
 // OrderListItem.js
 
-import styles from './OrderListItem.module.css';
+import styles from './PurchaseListItem.module.css';
 
 export default function OrderListItem({ order, isSelected, handleSelectOrder, handleEditOrder, handleDeleteOrder }) {
   const handleDeleteClick = (event) => {

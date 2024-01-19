@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import * as itemsAPI from '../../../utilities/items-api';
 import * as ordersAPI from '../../../utilities/order-api';
-import styles from './NewOrderPage.module.css';
+import styles from './NewPurchase.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 import MenuList from '../../MenuList/MenuList';
 import CategoryList from '../../CategoryList/CategoryList';
-import OrderDetail from '../../OrderDetail/OrderDetail';
+import OrderDetail from '../../PurchaseDetail/PurchaseDetail';
 import UserLogOut from '../../UserLogOut/UserLogOut';
+import Brand from '../../Brand/Brand';
 
-export default function NewOrderPage({ user, setUser }) {
+export default function NewPurchase({ user, setUser }) {
   const [menuItems, setMenuItems] = useState([]);
   const [activeCat, setActiveCat] = useState('');
   const [cart, setCart] = useState(null);
@@ -76,6 +77,7 @@ export default function NewOrderPage({ user, setUser }) {
     <main className={styles.NewOrderPage}>
       <aside>
         <UserLogOut user={user} setUser={setUser} />
+        {/* <Brand className={styles.BrandInNewOrder} /> */}
         <CategoryList
           categories={categoriesRef.current}
           cart={setCart}
