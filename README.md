@@ -33,10 +33,10 @@ This project is crafted to highlight details about diverse product offerings wit
 ## Layout
 ### Screenshots
 Include screenshots of different sections or pages of your project.
-![HomePage ](./Images/image1.png)
-![HomePage 1](./Images/image2.png)
-![HomePage 2](./Images/image4.png)
-![HomePage 3](./Images/image3.png)
+![HomePage ](./public/Images/image1.png)
+![HomePage 1](./public/Images/image2.png)
+![HomePage 2](./public/Images/image4.png)
+![HomePage 3](./public/Images/image3.png)
 
 
 
@@ -45,9 +45,9 @@ Include screenshots of different sections or pages of your project.
 
 - **User Authentication**: Ensure a personalized experience with secure user authentication, allowing users to customize their interactions with the platform.
 
-<!-- - **List Items**: diffents items to shop from different electronics category  -->
+- **List Items**: diffents items to shop from different electronics category 
 
-<!-- - **Airports Insights**: Gain insights into various airports worldwide. Explore details such as location, facilities, and key statistics, empowering users with knowledge about the global network of airports.
+- **Airports Insights**: Gain insights into various airports worldwide. Explore details such as location, facilities, and key statistics, empowering users with knowledge about the global network of airports.
 
 - **Aircraft Models and Manufacturers**: get into the intricate details of aircraft models and their manufacturers. Learn about the specifications, features, and the companies behind the creation of these flying marvels.
 
@@ -58,14 +58,18 @@ Include screenshots of different sections or pages of your project.
 
 ## Project Structure
 
-The project is structured into distinct sections, making it easy to navigate and contribute: -->
+The application is structured into distinct sections, making it easy to navigate and contribute:
 
-- **src/pages/employees**: Components for displaying and filtering the list of aviation professionals.
+- **src/pages/purchases**: Components for displaying and filtering the list of aviation professionals.
+- **src/pages/history**: Displaying the different order been checked with time and date.
 - **src/pages/Airlines**: Components related to airlines data.
-- **src/pages/Airports**: Components for presenting airport information.
-- **src/pages/Aiplanes**: Components handling aircraft models and manufacturers details.
-- **src/components**: Reusable React components for consistent UI elements.
-- **src/context**: Context setup for managing state across components.
+- **src/models/api**: functionality for CRUD.
+- **src/routes/api**: routes from the backend to fontend for different elements in the app.
+- **src/config**: connect the database and different schema to mongodb.
+- **src/utilities**: help the concept of using auth and different routes between the server and the front end .
+- **src/components**: use different components to have an according between the elements 
+- **server**: responsible about the data and the routing in the backend.
+
 
 ## Technologies Used
 - React
