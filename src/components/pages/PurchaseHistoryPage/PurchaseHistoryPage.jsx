@@ -1,4 +1,4 @@
-// OrderHistoryPage.jsx
+// PurchaseHistoryPage.jsx
 
 import styles from './PurchaseHistoryPage.module.css';
 import { useState, useEffect } from 'react';
@@ -29,29 +29,26 @@ export default function PurchaseHistoryPage({ user, setUser }) {
     fetchData();
   }, []);
 
-
-
-
   const handleEditOrder = async (orderId) => {
     try {
       console.log(`Edit order with ID ${orderId}`);
       const order = orders.find((order) => order._id === orderId);
-  
+
       if (!order) {
         console.error(`Order with ID ${orderId} not found.`);
         return;
       }
-  
+
       console.log('Selected order:', order);
-  
+
       // Ensure cart is properly initialized
       setCart({ lineItems: [] });
-  
+
       // Add or remove items as needed using addItemToCart and setItemQtyInCart
       for (const lineItem of order.lineItems) {
         const itemId = lineItem.item._id;
         const existingLineItem = cart.lineItems.find(item => item.item._id === itemId);
-  
+
         if (existingLineItem) {
           // Item already in the cart, update quantity if needed
           await ordersAPI.setItemQtyInCart(itemId, existingLineItem.qty + lineItem.qty);
@@ -60,19 +57,22 @@ export default function PurchaseHistoryPage({ user, setUser }) {
           await ordersAPI.addItemToCart(itemId);
         }
       }
-  
+
       // Refresh the order history to reflect the changes
       const updatedOrders = await ordersAPI.getOrderHistory();
       setOrders(updatedOrders);
-      setActiveOrder(updatedOrders.find(o => o._id === orderId) || null);
-  
-      // Navigate to the cart page (/orders)
-      navigate('/orders/edit/${order._id}');
+
+      // Find the updated order in the new order history
+      const updatedOrder = updatedOrders.find((o) => o._id === orderId);
+
+      setActiveOrder(updatedOrder);
+
+      // Navigate to the edit route with the order ID
+      navigate(`/orders/edit/${order._id}`);
     } catch (error) {
       console.error('An error occurred while editing the order:', error);
     }
   };
-
 
   const handleDeleteOrder = async (orderId) => {
     try {
@@ -129,6 +129,7 @@ export default function PurchaseHistoryPage({ user, setUser }) {
     </main>
   );
 }
+
 
 
 
