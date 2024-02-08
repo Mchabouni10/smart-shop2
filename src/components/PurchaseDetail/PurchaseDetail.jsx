@@ -35,7 +35,7 @@ export default function PurhcaseDetail({ order, handleChangeQty, handleCheckout 
                   <span className={styles.right}>TOTAL&nbsp;&nbsp;</span>
                   :
                   <button
-                    className="btn-med"
+                    className="btn-sm"
                     onClick={handleCheckout}
                     disabled={!lineItems.length}
                   >CHECKOUT</button>

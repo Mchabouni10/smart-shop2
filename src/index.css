@@ -127,6 +127,7 @@ p.error-message {
   color: white;
   text-align: center;
   z-index: 2; 
+  margin-top: 9vmin;
 }
 
 
