@@ -47,14 +47,7 @@ Include screenshots of different sections or pages of your project.
 
 - **List Items**: diffents items to shop from different electronics category 
 
-- **Airports Insights**: Gain insights into various airports worldwide. Explore details such as location, facilities, and key statistics, empowering users with knowledge about the global network of airports.
-
-- **Aircraft Models and Manufacturers**: get into the intricate details of aircraft models and their manufacturers. Learn about the specifications, features, and the companies behind the creation of these flying marvels.
-
-
-
-
-- **Aviation Professionals**: Explore detailed profiles of various aviation professionals, including pilots, co-pilots, chief engineers, avionics technicians, and maintenance technicians. Each profile includes information about their roles, responsibilities, and contact details.
+- **Order History**: delete or edit order by modifying the number of items in the carts.
 
 ## Project Structure
 
@@ -84,22 +77,7 @@ The application is structured into distinct sections, making it easy to navigate
 - api routers
 - api models 
 
-## Documentation
-- [Official React Documentation](https://reactjs.org/docs/getting-started.html)
-- [React Router Documentation](https://reactrouter.com/web/guides/quick-start)
 
-### YouTube Videos
-- [React Router Tutorial](https://www.youtube.com/watch?v=Ul3y1LXxzdU)
-- [React Hooks Tutorial](https://www.youtube.com/watch?v=LlvBzyy-558)
-
-### W3Schools Courses
-- [W3Schools React Tutorial](https://www.w3schools.com/)
-- [W3Schools React Router Tutorial](https://www.w3schools.com/react/default.asp)
-
-### Jordan Class Exemple
-
-### Homework
-- Complete the Homework Assignment.
 
 ## Installation
 -npx create-react-app
