@@ -9,6 +9,10 @@ export async function signUp(userData) {
     }
     localStorage.setItem('accessToken', response.accessToken);
     localStorage.setItem('refreshToken', response.refreshToken);
+    console.log('Tokens stored (signup):', {
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    });
     return getUser();
   } catch (e) {
     console.error('SignUp error:', e.message);
@@ -24,6 +28,10 @@ export async function login(credentials) {
     }
     localStorage.setItem('accessToken', response.accessToken);
     localStorage.setItem('refreshToken', response.refreshToken);
+    console.log('Tokens stored (login):', {
+      accessToken: response.accessToken,
+      refreshToken: response.refreshToken,
+    });
     return getUser();
   } catch (e) {
     console.error('Login error:', e.message);
@@ -52,10 +60,16 @@ export async function refreshToken() {
       throw new Error('Invalid refresh token response: Missing accessToken');
     }
     localStorage.setItem('accessToken', response.accessToken);
+    if (response.refreshToken) {
+      localStorage.setItem('refreshToken', response.refreshToken);
+      console.log('New refresh token stored:', response.refreshToken);
+    }
     return getUser();
   } catch (e) {
     console.error('RefreshToken error:', e.message);
-    logOut();
+    if (e.message.includes('Unauthorized') || e.message.includes('Invalid refresh token')) {
+      logOut();
+    }
     return null;
   }
 }
@@ -67,7 +81,6 @@ export async function getToken() {
     return null;
   }
   try {
-    // Validate JWT format (header.payload.signature)
     if (!token.match(/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/)) {
       throw new Error('Invalid token format');
     }
@@ -85,10 +98,9 @@ export async function getToken() {
 export function getUser() {
   const token = localStorage.getItem('accessToken');
   if (!token) {
-    return null; // Silently return null instead of warning
+    return null;
   }
   try {
-    // Validate JWT format
     if (!token.match(/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/)) {
       throw new Error('Invalid token format in getUser');
     }
@@ -111,7 +123,6 @@ export async function checkToken() {
     return false;
   }
   try {
-    // Validate JWT format
     if (!token.match(/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/)) {
       throw new Error('Invalid token format in checkToken');
     }
