@@ -1,47 +1,129 @@
 // users-service.js in utilities 
-
 import * as usersAPI from './users-api';
 
 export async function signUp(userData) {
-  const token = await usersAPI.signUp(userData);
-  localStorage.setItem('token', token);
-  return getUser();
+  try {
+    const response = await usersAPI.signUp(userData);
+    if (!response.accessToken || !response.refreshToken) {
+      throw new Error('Invalid signup response: Missing accessToken or refreshToken');
+    }
+    localStorage.setItem('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
+    return getUser();
+  } catch (e) {
+    console.error('SignUp error:', e.message);
+    return null;
+  }
 }
 
 export async function login(credentials) {
-  const token = await usersAPI.login(credentials);
-  localStorage.setItem('token', token);
-  return getUser();
-}
-
-export function getToken() {
-  const token = localStorage.getItem('token');
-  if (!token) return null;
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  if (payload.exp < Date.now() / 1000) {
-    localStorage.removeItem('token');
+  try {
+    const response = await usersAPI.login(credentials);
+    if (!response.accessToken || !response.refreshToken) {
+      throw new Error('Invalid login response: Missing accessToken or refreshToken');
+    }
+    localStorage.setItem('accessToken', response.accessToken);
+    localStorage.setItem('refreshToken', response.refreshToken);
+    return getUser();
+  } catch (e) {
+    console.error('Login error:', e.message);
     return null;
   }
-  return token;
+}
+
+export async function getProfile() {
+  try {
+    return await usersAPI.getProfile();
+  } catch (e) {
+    console.error('GetProfile error:', e.message);
+    return null;
+  }
+}
+
+export async function refreshToken() {
+  const refreshToken = localStorage.getItem('refreshToken');
+  if (!refreshToken) {
+    console.warn('No refresh token found');
+    return null;
+  }
+  try {
+    const response = await usersAPI.refreshToken(refreshToken);
+    if (!response.accessToken) {
+      throw new Error('Invalid refresh token response: Missing accessToken');
+    }
+    localStorage.setItem('accessToken', response.accessToken);
+    return getUser();
+  } catch (e) {
+    console.error('RefreshToken error:', e.message);
+    logOut();
+    return null;
+  }
+}
+
+export async function getToken() {
+  const token = localStorage.getItem('accessToken');
+  if (!token) {
+    console.warn('No access token found');
+    return null;
+  }
+  try {
+    // Validate JWT format (header.payload.signature)
+    if (!token.match(/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/)) {
+      throw new Error('Invalid token format');
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (payload.exp < Date.now() / 1000) {
+      return await refreshToken();
+    }
+    return token;
+  } catch (e) {
+    console.error('GetToken error:', e.message);
+    return null;
+  }
 }
 
 export function getUser() {
-  const token = getToken();
-  return token ? JSON.parse(atob(token.split('.')[1])).user : null;
+  const token = localStorage.getItem('accessToken');
+  if (!token) {
+    return null; // Silently return null instead of warning
+  }
+  try {
+    // Validate JWT format
+    if (!token.match(/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/)) {
+      throw new Error('Invalid token format in getUser');
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    return payload.user || null;
+  } catch (e) {
+    console.error('GetUser error:', e.message);
+    return null;
+  }
 }
 
 export function logOut() {
-  localStorage.removeItem('token');
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
 }
 
 export async function checkToken() {
-  const token = getToken();
+  const token = localStorage.getItem('accessToken');
   if (!token) {
     return false;
   }
-
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  const expiration = payload.exp * 1000; // Convert seconds to milliseconds
-
-  return expiration > Date.now();
+  try {
+    // Validate JWT format
+    if (!token.match(/^[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+\.[A-Za-z0-9-_]+$/)) {
+      throw new Error('Invalid token format in checkToken');
+    }
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    const expiration = payload.exp * 1000;
+    if (expiration < Date.now()) {
+      const user = await refreshToken();
+      return !!user;
+    }
+    return true;
+  } catch (e) {
+    console.error('CheckToken error:', e.message);
+    return false;
+  }
 }

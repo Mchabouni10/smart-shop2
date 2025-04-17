@@ -1,30 +1,56 @@
-import React, { useState } from 'react';
-import { Routes, Route, Navigate, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import styles from './App.module.css';
 import { getUser } from './utilities/users-service';
+import ErrorBoundary from './components/ErrorBoundary';
 import AuthPage from './components/pages/AuthPage/AuthPage';
 import NewPurchase from './components/pages/NewPurchase/NewPurchase';
 import PurchaseHistoryPage from './components/pages/PurchaseHistoryPage/PurchaseHistoryPage';
 
 export default function App() {
-  const [user, setUser] = useState(getUser());
-  return (
-    <main className={styles.App}>
-      { user ?
-        <>
-          <Routes>
-            {/* client-side route that renders the component instance if the path matches the url in the address bar */}
-            <Route path="/orders/new" element={<NewPurchase user={user} setUser={setUser} />} />
-            <Route path="/orders" element={<PurchaseHistoryPage user={user} setUser={setUser} />} />
-            {/* redirect to /orders/new if path in address bar hasn't matched a <Route> above */}
-            <Route path="/*" element={<Navigate to="/orders/new" />} />
-            {/* <Route path="/products/*" element={<Navigate to="/index.ejs" />} /> */}
-          </Routes>
-          {/* <Link to="/products">Products</Link> */}
-        </>
-        :
-        <AuthPage setUser={setUser} />
+  const [user, setUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const currentUser = await getUser();
+        setUser(currentUser);
+      } catch (error) {
+        console.error('Failed to fetch user:', error);
+        setUser(null);
+      } finally {
+        setIsLoading(false);
       }
-    </main>
+    };
+    fetchUser();
+  }, []);
+
+  if (isLoading) {
+    return <div className={styles.App}>Loading...</div>;
+  }
+
+  return (
+    <ErrorBoundary>
+      <main className={styles.App}>
+        {user ? (
+          <>
+            <Routes>
+              <Route
+                path="/orders/new"
+                element={<NewPurchase user={user} setUser={setUser} />}
+              />
+              <Route
+                path="/orders"
+                element={<PurchaseHistoryPage user={user} setUser={setUser} />}
+              />
+              <Route path="/*" element={<Navigate to="/orders/new" />} />
+            </Routes>
+          </>
+        ) : (
+          <AuthPage setUser={setUser} />
+        )}
+      </main>
+    </ErrorBoundary>
   );
 }

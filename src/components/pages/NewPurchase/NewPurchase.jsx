@@ -6,8 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import MenuList from '../../MenuList/MenuList';
 import CategoryList from '../../CategoryList/CategoryList';
 import OrderDetail from '../../PurchaseDetail/PurchaseDetail';
-import UserLogOut from '../../UserLogOut/UserLogOut';
-import Brand from '../../Brand/Brand';
+import UserLogOut from '../../UserLogout/UserLogOut';
 
 export default function NewPurchase({ user, setUser }) {
   const [menuItems, setMenuItems] = useState([]);

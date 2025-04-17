@@ -4,7 +4,7 @@ import styles from './PurchaseHistoryPage.module.css';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as ordersAPI from '../../../utilities/order-api';
-import UserLogOut from '../../UserLogOut/UserLogOut'
+import UserLogOut from '../../UserLogout/UserLogOut'
 import OrderList from '../../PurchaseList/PurchaseList';
 import OrderDetail from '../../PurchaseDetail/PurchaseDetail';
 import { getToken } from '../../../utilities/users-service';
