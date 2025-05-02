@@ -9,8 +9,8 @@ const SignUpForm = ({ setUser }) => {
     password: "",
     confirm: "",
   });
-
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (evt) => {
     setFormData({
@@ -37,10 +37,20 @@ const SignUpForm = ({ setUser }) => {
     }
     const payload = { name, email, password };
     try {
+      setIsLoading(true);
       const user = await signUp(payload);
       setUser(user);
     } catch (e) {
-      setError(e.message || 'Sign Up Failed - Try Again');
+      console.error('SignUp failed:', e);
+      if (e.message.includes('Email already exists')) {
+        setError('This email is already registered');
+      } else if (e.message.includes('Validation')) {
+        setError('Invalid input data. Please check your details.');
+      } else {
+        setError(e.message || 'Sign Up Failed - Try Again');
+      }
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,7 +65,8 @@ const SignUpForm = ({ setUser }) => {
     !/[A-Z]/.test(formData.password) ||
     !/[a-z]/.test(formData.password) ||
     !/\d/.test(formData.password) ||
-    !/[!@#$%^&*(),.?":{}|<>]/.test(formData.password);
+    !/[!@#$%^&*(),.?":{}|<>]/.test(formData.password) ||
+    isLoading;
 
   return (
     <div>
@@ -68,6 +79,7 @@ const SignUpForm = ({ setUser }) => {
             value={formData.name}
             onChange={handleChange}
             required
+            disabled={isLoading}
           />
           <label>Email</label>
           <input
@@ -76,6 +88,7 @@ const SignUpForm = ({ setUser }) => {
             value={formData.email}
             onChange={handleChange}
             required
+            disabled={isLoading}
           />
           <label>Password</label>
           <input
@@ -84,6 +97,7 @@ const SignUpForm = ({ setUser }) => {
             value={formData.password}
             onChange={handleChange}
             required
+            disabled={isLoading}
           />
           <label>Confirm</label>
           <input
@@ -92,13 +106,14 @@ const SignUpForm = ({ setUser }) => {
             value={formData.confirm}
             onChange={handleChange}
             required
+            disabled={isLoading}
           />
           <button className="Login-Out-Button" type="submit" disabled={disable}>
-            SIGN UP
+            {isLoading ? 'Signing Up...' : 'SIGN UP'}
           </button>
         </form>
       </div>
-      <p className="error-message">{error}</p>
+      {error && <p className="error-message" style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-// send-request.js
+//utilities/send-request.js
 import { getToken, refreshToken } from './users-service';
 
 // Flag to prevent multiple simultaneous token refreshes

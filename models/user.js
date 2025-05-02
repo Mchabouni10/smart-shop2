@@ -27,10 +27,18 @@ const userSchema = new mongoose.Schema({
     type: String, 
     required: [true, 'Password is required'],
     minlength: [8, 'Password must be at least 8 characters'],
-    select: false // Never return password in queries
+    select: false
   },
   refreshToken: { 
     type: String,
+    select: false
+  },
+  resetToken: {
+    type: String,
+    select: false
+  },
+  resetTokenExpires: {
+    type: Date,
     select: false
   },
   role: {
@@ -50,9 +58,10 @@ const userSchema = new mongoose.Schema({
   toJSON: {
     virtuals: true,
     transform: function(doc, ret) {
-      // Remove sensitive fields
       delete ret.password;
       delete ret.refreshToken;
+      delete ret.resetToken;
+      delete ret.resetTokenExpires;
       delete ret.__v;
       return ret;
     }
@@ -82,7 +91,7 @@ userSchema.methods.comparePassword = async function(candidatePassword) {
 
 // Static method for finding by email
 userSchema.statics.findByEmail = function(email) {
-  return this.findOne({ email }).select('+password +refreshToken');
+  return this.findOne({ email }).select('+password +refreshToken +resetToken +resetTokenExpires');
 };
 
 // Virtual for user profile URL

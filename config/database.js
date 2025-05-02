@@ -1,27 +1,24 @@
 //config/database.js
-// config/database.js
 const mongoose = require('mongoose');
 
+let isConnected = false;
+
 const connectDB = async () => {
+  if (isConnected) {
+    console.log('MongoDB already connected');
+    return mongoose.connection;
+  }
+
   try {
-    // Connection options for newer versions of MongoDB
-    const connectionOptions = {
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 5000,  // Timeout after 5s instead of 30s
-      maxPoolSize: 10,  // Maintain up to 10 socket connections
-    };
+      serverSelectionTimeoutMS: 5000,
+      maxPoolSize: 10
+    });
 
-    // Debug mode for development
-    if (process.env.NODE_ENV === 'development') {
-      mongoose.set('debug', true);
-    }
-
-    const conn = await mongoose.connect(process.env.MONGODB_URI, connectionOptions);
-    
+    isConnected = true;
     console.log(`MongoDB Connected: ${conn.connection.host}`);
-    console.log(`Database: ${conn.connection.name}`);
-    console.log(`Port: ${conn.connection.port}`);
 
     // Connection event handlers
     mongoose.connection.on('connected', () => {
@@ -34,24 +31,24 @@ const connectDB = async () => {
 
     mongoose.connection.on('disconnected', () => {
       console.warn('Mongoose disconnected from DB');
+      isConnected = false;
     });
 
-    // Close connection on process termination
+    // Clean up on process termination
     process.on('SIGINT', async () => {
       await mongoose.connection.close();
-      console.log('Mongoose connection closed due to app termination');
+      console.log('MongoDB connection closed due to app termination');
       process.exit(0);
     });
 
     return conn;
   } catch (err) {
     console.error('MongoDB connection error:', err.message);
-    console.error('Connection URI:', process.env.MONGODB_URI);
-    console.error('Error stack:', err.stack);
-    
-    // Exit process with failure if database connection fails
     process.exit(1);
   }
 };
+
+// Remove all listeners before adding new ones
+mongoose.connection.removeAllListeners();
 
 module.exports = connectDB;

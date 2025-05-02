@@ -1,4 +1,4 @@
-// users-service.js
+//utilities/users-service.js
 import * as usersAPI from './users-api';
 import { jwtDecode } from 'jwt-decode';
 
@@ -20,7 +20,7 @@ export async function signUp(userData) {
       stack: error.stack,
       userData: { ...userData, password: '[REDACTED]' }
     });
-    throw new Error('Registration failed. Please try again.');
+    throw new Error(error.message || 'Registration failed. Please try again.');
   }
 }
 
@@ -29,7 +29,6 @@ export async function login(credentials) {
     console.debug('Attempting login with email:', credentials.email);
     const response = await usersAPI.login(credentials);
     validateAndStoreTokens(response);
-    
     const user = getUser();
     console.debug('Login successful for user:', user);
     return user;
@@ -39,7 +38,7 @@ export async function login(credentials) {
       stack: error.stack,
       email: credentials.email
     });
-    throw new Error('Login failed. Please check your credentials.');
+    throw new Error(error.message || 'Login failed. Please check your credentials.');
   }
 }
 
@@ -55,7 +54,6 @@ export async function getProfile() {
 }
 
 export async function refreshToken() {
-  // If refresh is already in progress, return the existing promise
   if (refreshPromise) {
     return refreshPromise;
   }
@@ -67,18 +65,17 @@ export async function refreshToken() {
   }
 
   try {
-    refreshPromise = usersAPI.refreshToken(refreshTokenValue);
+    // Send refresh token in request body
+    refreshPromise = usersAPI.refreshToken({ refreshToken: refreshTokenValue });
     const response = await refreshPromise;
 
-    if (!response?.accessToken) {
+    if (!response?.data?.accessToken) {
       throw new Error('Invalid token response from server');
     }
 
-    localStorage.setItem(ACCESS_TOKEN_KEY, response.accessToken);
-    
-    // Only update refresh token if a new one was provided
-    if (response.refreshToken) {
-      localStorage.setItem(REFRESH_TOKEN_KEY, response.refreshToken);
+    localStorage.setItem(ACCESS_TOKEN_KEY, response.data.accessToken);
+    if (response.data.refreshToken) {
+      localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refreshToken);
       console.debug('Refresh token updated');
     }
 
@@ -90,7 +87,6 @@ export async function refreshToken() {
       stack: error.stack
     });
 
-    // Clear tokens if refresh failed due to invalid token
     if (error.message.includes('Unauthorized') || 
         error.message.includes('Invalid') || 
         error.message.includes('expired')) {
@@ -100,6 +96,36 @@ export async function refreshToken() {
     throw new Error('Session refresh failed. Please login again.');
   } finally {
     refreshPromise = null;
+  }
+}
+
+export async function requestPasswordReset(email) {
+  try {
+    const response = await usersAPI.requestPasswordReset(email);
+    console.debug('Password reset request successful for email:', email);
+    return response;
+  } catch (error) {
+    console.error('RequestPasswordReset error:', {
+      message: error.message,
+      stack: error.stack,
+      email
+    });
+    throw new Error(error.message || 'Failed to request password reset. Please try again.');
+  }
+}
+
+export async function resetPassword(data) {
+  try {
+    const response = await usersAPI.resetPassword(data);
+    console.debug('Password reset successful for email:', data.email);
+    return response;
+  } catch (error) {
+    console.error('ResetPassword error:', {
+      message: error.message,
+      stack: error.stack,
+      email: data.email
+    });
+    throw new Error(error.message || 'Failed to reset password. Please try again.');
   }
 }
 
@@ -113,7 +139,6 @@ export function getUser() {
       throw new Error('Invalid token payload');
     }
     
-    // Check token expiration
     if (payload.exp * 1000 < Date.now()) {
       console.debug('Token expired');
       return null;
@@ -176,16 +201,14 @@ export async function getToken() {
 
 // ---------- Utility Functions ----------
 
-function validateAndStoreTokens({ accessToken, refreshToken }) {
-  if (!accessToken) {
+function validateAndStoreTokens(response) {
+  if (!response?.data?.accessToken) {
     throw new Error('Missing access token');
   }
 
-  // Refresh token is optional in case the server doesn't return a new one
-  localStorage.setItem(ACCESS_TOKEN_KEY, accessToken);
-  
-  if (refreshToken) {
-    localStorage.setItem(REFRESH_TOKEN_KEY, refreshToken);
+  localStorage.setItem(ACCESS_TOKEN_KEY, response.data.accessToken);
+  if (response.data.refreshToken) {
+    localStorage.setItem(REFRESH_TOKEN_KEY, response.data.refreshToken);
   }
 
   console.debug('Tokens stored successfully');
@@ -202,11 +225,9 @@ function parseJwt(token) {
   }
 
   try {
-    // Prefer jwt-decode library for proper decoding
     return jwtDecode(token);
   } catch (decodeError) {
     console.warn('jwt-decode failed, falling back to manual parsing:', decodeError);
-    
     try {
       const payload = parts[1];
       const decoded = atob(payload.replace(/-/g, '+').replace(/_/g, '/'));

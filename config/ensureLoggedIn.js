@@ -9,17 +9,20 @@ module.exports = function (req, res, next) {
 
   if (!token) {
     return res.status(401).json({ 
+      success: false,
       msg: 'Authentication required',
       code: 'NO_TOKEN'
     });
   }
 
   try {
-    const payload = jwt.verify(token, process.env.SECRET);
+    // Verify token using JWT_SECRET from environment
+    const payload = jwt.verify(token, process.env.JWT_SECRET);
     
     // Verify token has required claims
     if (!payload.user || !payload.exp) {
       return res.status(401).json({ 
+        success: false,
         msg: 'Invalid token structure',
         code: 'INVALID_TOKEN'
       });
@@ -31,6 +34,7 @@ module.exports = function (req, res, next) {
       req.tokenNeedsRefresh = true;
     }
 
+    // Attach user and token info to request
     req.user = payload.user;
     req.tokenExpiresAt = new Date(payload.exp * 1000);
     
@@ -49,6 +53,7 @@ module.exports = function (req, res, next) {
     }
 
     return res.status(401).json({ 
+      success: false,
       msg: errorMsg,
       code: code,
       shouldRefresh: err.name === 'TokenExpiredError'
