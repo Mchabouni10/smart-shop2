@@ -1,44 +1,79 @@
-//----------------------------------------------Requiers
-// Always require and configure near the top
-require("dotenv").config();
-// Connect to the database
-require("./config/database");
+require('dotenv').config();
 const express = require("express");
-const path = require("path");
-const logger = require("morgan"); //JSON request
-const port = process.env.PORT || 3001;
 const app = express();
+const cors = require('cors');
+const path = require("path");
+const morgan = require("morgan");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const connectDB = require("./config/database");
+const port = process.env.PORT || 3001;
 
-//----------------------------------------------Midware
+// Database connection
+connectDB();
 
-app.use(logger("dev"));
-app.use(express.json());
+// Security middleware
+app.use(helmet());
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
+app.set('trust proxy', 1); // Trust first proxy
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use(limiter);
+
+// Logging
+app.use(morgan(process.env.NODE_ENV === 'development' ? 'dev' : 'combined'));
+
+// Body parsing
+app.use(express.json({ limit: '10kb' }));
+app.use(express.urlencoded({ extended: true }));
+
+// Static files
 app.use(express.static(path.join(__dirname, "build")));
 
-//----------------------------------------------Routes
-// Put API routes here, before the "catch all" route
-
-// Middleware to verify token and assign user object of payload to req.user.
-
-
-// Check if token and create req.user
+// Authentication middleware
 app.use(require('./config/checkToken'));
 
-// Put API routes here, before the "catch all" route
+// API routes
 app.use('/api/users', require('./routes/api/users'));
-// Protect the API routes below from anonymous users
-const ensureLoggedIn = require('./config/ensureLoggedIn');
-app.use('/api/items', ensureLoggedIn, require('./routes/api/items'));
-app.use('/api/orders', ensureLoggedIn, require('./routes/api/orders'));
+app.use('/api/items', require('./config/ensureLoggedIn'), require('./routes/api/items'));
+app.use('/api/orders', require('./config/ensureLoggedIn'), require('./routes/api/orders'));
 
-//other mid and routs
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'healthy' });
+});
 
-app.use("/api/users", require("./routes/api/users"));
-app.get("/*", function (req, res) {
+// Serve React app
+app.get("/*", (req, res) => {
   res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-//----------------------------------------------Server
-app.listen(port, function () {
-  console.log(`Express app running on port ${port}`);
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Internal Server Error' });
 });
+
+// Server startup
+const server = app.listen(port, () => {
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${port}`);
+});
+
+// Handle unhandled promise rejections
+process.on('unhandledRejection', (err) => {
+  console.error(`Unhandled Rejection: ${err.message}`);
+  server.close(() => process.exit(1));
+});
+
+module.exports = server;
+

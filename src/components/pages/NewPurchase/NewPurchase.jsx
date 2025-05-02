@@ -1,5 +1,5 @@
 //src/components/pages/NewPurchase/NewPurchase.jsx
-
+import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import * as itemsAPI from '../../../utilities/items-api';
 import * as ordersAPI from '../../../utilities/order-api';
@@ -9,7 +9,7 @@ import MenuList from '../../MenuList/MenuList';
 import CategoryList from '../../CategoryList/CategoryList';
 import OrderDetail from '../../PurchaseDetail/PurchaseDetail';
 import UserLogOut from '../../UserLogout/UserLogOut';
-import { getToken } from '../../../utilities/users-service';
+import { getToken, refreshToken } from '../../../utilities/users-service';
 
 export default function NewPurchase({ user, setUser }) {
   const [menuItems, setMenuItems] = useState([]);
@@ -22,11 +22,15 @@ export default function NewPurchase({ user, setUser }) {
 
   useEffect(() => {
     async function checkAuth() {
-      const token = await getToken();
+      let token = await getToken();
       if (!token) {
-        setError('Please log in to continue');
-        navigate('/login');
-        return;
+        const refreshedUser = await refreshToken();
+        if (!refreshedUser) {
+          setError('Please log in to continue');
+          navigate('/login');
+          return;
+        }
+        token = await getToken();
       }
 
       async function getItems() {

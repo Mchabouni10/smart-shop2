@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './MenuList.module.css';
 import MenuListItem from '../MenuListItem/MenuListItem';
 

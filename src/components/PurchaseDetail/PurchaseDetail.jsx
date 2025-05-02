@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './PurchaseDetail.module.css';
 import LineItem from '../LineItem/LineItem';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

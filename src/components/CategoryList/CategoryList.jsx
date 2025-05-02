@@ -1,3 +1,4 @@
+import React from 'react';
 import styles from './CategoryList.module.css';
 
 export default function CategoryList({ categories, activeCat, setActiveCat }) {

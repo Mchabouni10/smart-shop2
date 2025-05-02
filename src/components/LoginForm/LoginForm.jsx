@@ -1,10 +1,9 @@
-// LoginForm.jsx
+//src/components/LoginForm/LoginForm.jsx
 
 import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import { login } from '../../utilities/users-service';
-
 
 const LoginForm = ({ setUser }) => {
   const [credentials, setCredentials] = useState({
@@ -24,11 +23,23 @@ const LoginForm = ({ setUser }) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    const { email, password } = credentials;
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setError('Invalid email format');
+      return;
+    }
+    if (!password) {
+      setError('Password is required');
+      return;
+    }
+    console.log('Login attempt with credentials:', { email, password: '[REDACTED]' });
     try {
       const user = await login(credentials);
-      setUser(user); // Assuming login function returns user data
-    } catch {
-      setError("Login Failed - Try Again");
+      console.log('Login successful, user:', user);
+      setUser(user);
+    } catch (e) {
+      console.error('Login failed:', e);
+      setError(e.message || 'Login Failed - Try Again');
     }
   };
 
@@ -45,7 +56,7 @@ const LoginForm = ({ setUser }) => {
             name="email"
             value={credentials.email}
             onChange={handleChange}
-            placeholder="" 
+            placeholder=""
             required
           />
           <label>Password<FontAwesomeIcon icon={faLock} size="1x" style={{marginLeft:'6px', color: 'var(--text-dark)' }} /></label>
@@ -55,14 +66,14 @@ const LoginForm = ({ setUser }) => {
               name="password"
               value={credentials.password}
               onChange={handleChange}
-              placeholder="" 
+              placeholder=""
               required
             />
           </div>
           <button className="Login-Out-Button" type="submit">LOG IN</button>
         </form>
       </div>
-      <p className="error-message">&nbsp;{error}</p>
+      <p className="error-message">{error}</p>
     </div>
   );
 };

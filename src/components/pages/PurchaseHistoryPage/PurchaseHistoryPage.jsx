@@ -1,13 +1,12 @@
 // PurchaseHistoryPage.jsx
-
+import React, { useState, useEffect } from 'react';
 import styles from './PurchaseHistoryPage.module.css';
-import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as ordersAPI from '../../../utilities/order-api';
 import UserLogOut from '../../UserLogout/UserLogOut';
 import OrderList from '../../PurchaseList/PurchaseList';
 import OrderDetail from '../../PurchaseDetail/PurchaseDetail';
-import { getToken } from '../../../utilities/users-service';
+import { getToken, refreshToken } from '../../../utilities/users-service';
 
 export default function PurchaseHistoryPage({ user, setUser }) {
   const navigate = useNavigate();
@@ -19,11 +18,15 @@ export default function PurchaseHistoryPage({ user, setUser }) {
 
   useEffect(() => {
     async function fetchData() {
-      const token = await getToken();
+      let token = await getToken();
       if (!token) {
-        setError('Please log in to view your order history');
-        navigate('/login');
-        return;
+        const refreshedUser = await refreshToken();
+        if (!refreshedUser) {
+          setError('Please log in to view your order history');
+          navigate('/login');
+          return;
+        }
+        token = await getToken();
       }
 
       try {
@@ -88,22 +91,10 @@ export default function PurchaseHistoryPage({ user, setUser }) {
         return;
       }
 
-      const response = await fetch(`/api/orders/${orderId}`, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (response.ok) {
-        setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
-        if (activeOrder && activeOrder._id === orderId) {
-          setActiveOrder(null);
-        }
-      } else {
-        const errorText = await response.text();
-        throw new Error(`Failed to delete order: ${errorText}`);
+      await ordersAPI.deleteOrder(orderId);
+      setOrders((prevOrders) => prevOrders.filter((order) => order._id !== orderId));
+      if (activeOrder && activeOrder._id === orderId) {
+        setActiveOrder(null);
       }
     } catch (error) {
       console.error('Error deleting order:', error);
